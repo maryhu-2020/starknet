@@ -12,6 +12,14 @@ from starkware.starknet.common.syscalls import get_caller_address
 func balance(user : felt) -> (res : felt):
 end
 
+# An event emitted whenever increase_balance() is called.
+# current_balance is the balance before it was increased.
+@event
+func increase_balance_called(
+        current_balance : felt, amount : felt, user:felt):
+end
+
+
 # Increases the balance by the given amount.
 @external
 func increase_balance{
@@ -28,6 +36,10 @@ func increase_balance{
 
     let (res) = balance.read(user=user)
     balance.write(user, res + amount)
+
+
+    # Emit the event.
+    increase_balance_called.emit(current_balance=res, amount=amount, user=user)
     return ()
 end
 
