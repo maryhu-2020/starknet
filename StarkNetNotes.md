@@ -25,6 +25,7 @@
  - starknet get_transaction_receipt
  - starknet get_code
  - starknet get_block
+ - starknet get_storage_at
 
 
 Note that while **deploy** and **invoke** affect StarkNet’s state, all other functions are read-only 
