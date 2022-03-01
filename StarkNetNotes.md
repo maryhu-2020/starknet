@@ -4,6 +4,9 @@ https://starknet.io/
 
 
 1. L2 Node
+
+ - Flow chart: https://cdn.discordapp.com/attachments/853954510515208192/947905885202681936/image.png
+
  - Provers
    	HD: >> L1 full node
 
