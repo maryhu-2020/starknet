@@ -1,0 +1,5 @@
+artifacts
+.env
+accounts.json
+*.accounts.json
+*.deployments.txt
