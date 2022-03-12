@@ -4,10 +4,13 @@ https://starknet.io/
 
 
 1. L2 Node
+
+ - Flow chart: https://cdn.discordapp.com/attachments/853954510515208192/947905885202681936/image.png
+
  - Provers
    	HD: >> L1 full node
 
- - Execution Node
+ - Executor
 	HD: > L1 full node (Solana type)
 
  above 2 cores consists of Starknet sequencer node	
@@ -45,3 +48,4 @@ Note that while **deploy** and **invoke** affect StarkNet’s state, all other f
 	During the construction of the block, as it is accumulating new transactions, the block’s status is PENDING. While PENDING, new transactions are dynamically added to the block. Once the sequencer decides to “close” the block, it becomes ACCEPTED_ON_L2 and its hash is computed.
 
 	Pending block:  in every CLI command that takes block_number as an argument (contract_call/get_block/get_code/get_storage_at), we can query the StarkNet with respect to the pending block by specifying block_number=pending.
+
