@@ -2,8 +2,18 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.hash import hash2
-from starkware.cairo.common.math import assert_le, assert_nn_le, unsigned_div_rem
-from starkware.starknet.common.syscalls import storage_read, storage_write, get_caller_address
+from starkware.cairo.common.math import (
+    assert_le, 
+    assert_nn_le, 
+    unsigned_div_rem, 
+    assert_not_zero,
+    assert_not_equal
+    )
+from starkware.starknet.common.syscalls import (
+    storage_read, 
+    storage_write, 
+    get_caller_address
+    )
 
 
 # The maximum amount of each token that belongs to the AMM.
@@ -131,8 +141,8 @@ end
 @external
 func init_pool{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_a : felt, token_b : felt):
-    #let (caller) = get_caller_address()
-    #assert caller != 0
+    let (caller) = get_caller_address()
+    assert_not_zero(caller)
 
     assert_nn_le(token_a, POOL_UPPER_BOUND - 1)
     assert_nn_le(token_b, POOL_UPPER_BOUND - 1)
