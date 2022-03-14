@@ -15,10 +15,10 @@ from starkware.python.utils import from_bytes
 #    
 # >nile deploy amm -->deploy the contract
 SIGNER_SECRET=12345
-SIGNER_ADDRESS='0x0769dd2ff9e111ad2bf885fe5ccdd5fd44ac4761f04849aac0320802dbd325b4'
+SIGNER_ADDRESS='0x3d62f79be5f588c30125098d2dd39bab4757da655ea484ba6e302c4db24ac43'
 AMM_CONTRACT_ADDRESS='0x02d938999364bab78663bc321c17bf28096e2319499c377129a16d396074b5eb'
 network = "http://localhost:5000"
-chain_id = from_bytes(b"SN_LOCALHOST")
+chain_id = StarknetChainId.TESTNET
 
 #devnet_client = Client("http://localhost:5000", chain=StarknetChainId.TESTNET)
 #testnet_client = Client("https://alpha4.starknet.io", chain=StarknetChainId.TESTNET)
@@ -32,16 +32,16 @@ chain_id = from_bytes(b"SN_LOCALHOST")
 # create an client account instance for given signer_address and signer_secret
 #
 async def create_account_instance() -> AccountClient:
-    account_client = await AccountClient.create_account(net="http://localhost:5000", chain=StarknetChainId.TESTNET)
-    
-    '''
+    #account_client = await AccountClient.create_account(net="http://localhost:5000", chain=StarknetChainId.TESTNET)
+    #print('account address: %s' % hex(account_client.address))
+
     account_client = AccountClient(
         address=SIGNER_ADDRESS,
         key_pair=KeyPair.from_private_key(SIGNER_SECRET),
         net=network,
         chain=chain_id,
-    )
-    '''
+    )    
+    
     return account_client
 
 #
@@ -57,7 +57,7 @@ async def create_contract_instance(_client: AccountClient) -> Contract:
 
 
 async def test_init_pool(contract:Contract):    
-    await contract.functions['init_pool'].invoke(6,20)
+    invocation = await contract.functions['init_pool'].invoke(6,20)    
     
     (t1_balance,) = await contract.functions['get_pool_token_balance'].call(1)    
     assert t1_balance == 6
