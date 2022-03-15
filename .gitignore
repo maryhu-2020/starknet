@@ -3,3 +3,4 @@ artifacts
 accounts.json
 *.accounts.json
 *.deployments.txt
+*/__pycache__/*

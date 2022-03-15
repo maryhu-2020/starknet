@@ -49,3 +49,17 @@ Note that while **deploy** and **invoke** affect StarkNet’s state, all other f
 
 	Pending block:  in every CLI command that takes block_number as an argument (contract_call/get_block/get_code/get_storage_at), we can query the StarkNet with respect to the pending block by specifying block_number=pending.
 
+4. Fee schema:
+ - estimated fee = estimated gas * estimated gas price
+	- off-chain computational complexity of a transaction
+		- execution traces: TraceCells[tx]/L
+			- Number of Cairo steps
+			- Number of applications of each Cairo builtin (e.g., five range checks and two Pedersens)
+			- a pre-defined weights factor
+				- Cairo step: 0.05 gas/step
+				- ECDSA: 25.6 gas/application
+				- range check: 0.4 gas/application
+				- bitwise: 12.8 gas/application
+				- Pedersen: 0.4 gas/application
+	- costs occurring from L2→L1 messages
+	- data availability
